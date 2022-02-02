@@ -46,6 +46,7 @@ class UpdateInventory(APIView):
         else:
             return Response(serializer.errors)
 
+
 class DeleteInventory(APIView):
     def post(self, request, pk):
         inventory = Inventory.objects.get(product_id=pk)
