@@ -23,6 +23,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=150)
     address = models.CharField(max_length=100)
     postal_code = models.PositiveIntegerField()
+    # cart = models.JSONField()
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
