@@ -22,8 +22,7 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     address = models.CharField(max_length=100)
-    postal_code = models.PositiveIntegerField()
-    cart = models.JSONField(default=dict)
+    postal_code = models.CharField(max_length=6)
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -38,3 +37,12 @@ class Account(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+
+class Cart(models.Model):
+    cart_item = models.ForeignKey('inventory.Inventory', on_delete=models.CASCADE)
+    cart_owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'{self.cart_owner}, {self.cart_item}'

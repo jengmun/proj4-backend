@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Order(models.Model):
-    order_no = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    order_no = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey('account.Account', on_delete=models.DO_NOTHING)
 
@@ -12,7 +12,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     price = models.PositiveSmallIntegerField()
     cost = models.PositiveIntegerField()
     quantity = models.PositiveSmallIntegerField()
