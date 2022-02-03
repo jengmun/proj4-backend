@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Account, Cart
-from .serializers import CartSerializer
+from .models import Account
+from .serializers import UserSerializer
 
 
 class CreateAccount(APIView):
@@ -16,14 +16,9 @@ class CreateAccount(APIView):
         return Response("Account created!")
 
 
-class AddToCart(APIView):
-    def post(self, request):
-        serializer = CartSerializer(data=request.data)
+class GetAccountDetails(APIView):
+    def get(self, request, email):
+        account = Account.objects.get(email=email)
+        serializer = UserSerializer(account)
 
-        if serializer.is_valid():
-            serializer.save()
-
-            return Response(serializer.data)
-
-        else:
-            return Response(serializer.errors)
+        return Response(serializer.data)

@@ -38,11 +38,3 @@ class Account(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-
-class Cart(models.Model):
-    cart_item = models.ForeignKey('inventory.Inventory', on_delete=models.CASCADE)
-    cart_owner = models.ForeignKey(Account, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f'{self.cart_owner}, {self.cart_item}'
