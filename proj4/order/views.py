@@ -70,3 +70,12 @@ class OrderList(APIView):
             data.append({'order_no': order['order_no'], 'details': order_details, 'total': order['total'], 'date': order['date']})
 
         return Response(data)
+
+
+class GetAllOrders(APIView):
+    # permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        orders = OrderItem.objects.all().values('item__name', 'quantity', 'price', 'order__date', 'order__total')
+
+        return Response(orders)
