@@ -16,6 +16,17 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def create_superuser(self, email, first_name, last_name, address, postal_code, password=None):
+        if not email:
+            raise ValueError('Please input email address.')
+
+        user = self.create_user(email=email, first_name=first_name, last_name=last_name, address=address, postal_code=postal_code, password=password)
+
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        return user
+
 
 class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
