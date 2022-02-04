@@ -8,7 +8,7 @@ class Order(models.Model):
     customer = models.ForeignKey('account.Account', on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return self.order_no
+        return str(self.order_no)
 
 
 class OrderItem(models.Model):
@@ -20,4 +20,4 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return str(self.id)

@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from .models import Inventory
 from .serializers import InventorySerializer
 
@@ -21,6 +22,8 @@ class InventoryDetails(APIView):
 
 
 class AddInventory(APIView):
+    # permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         serializer = InventorySerializer(data=request.data)
 
@@ -34,6 +37,8 @@ class AddInventory(APIView):
 
 
 class UpdateInventory(APIView):
+    # permission_classes = (IsAuthenticated,)
+
     def post(self, request, pk):
         inventory = Inventory.objects.get(product_id=pk)
         serializer = InventorySerializer(instance=inventory, data=request.data, partial=True)
@@ -48,6 +53,8 @@ class UpdateInventory(APIView):
 
 
 class DeleteInventory(APIView):
+    # permission_classes = (IsAuthenticated,)
+
     def post(self, request, pk):
         inventory = Inventory.objects.get(product_id=pk)
         inventory.delete()

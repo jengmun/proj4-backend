@@ -1,10 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from .models import Cart
 from .serializers import CartSerializer
 
 
 class CartList(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request):
         items = Cart.objects.filter(cart_owner__id=request.query_params['cart_owner'])\
             .values('cart_item', 'cart_item__name', 'cart_item__image', 'cart_item__price', 'quantity')
@@ -13,6 +16,8 @@ class CartList(APIView):
 
 
 class UpdateCart(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request, pk):
         queryset = Cart.objects.filter(cart_item=pk, cart_owner=request.data['cart_owner'])
         if queryset.exists():
@@ -56,6 +61,8 @@ class UpdateCart(APIView):
 
 
 class DeleteFromCart(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def delete(self, request, pk):
         item = Cart.objects.filter(cart_item=pk, cart_owner=request.query_params['cart_owner'])
         item.delete()
