@@ -72,10 +72,41 @@ class OrderList(APIView):
         return Response(data)
 
 
-class GetAllOrders(APIView):
+class OrderAnalytics(APIView):
     # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        orders = OrderItem.objects.all().values('item__name', 'quantity', 'price', 'order__date', 'order__total')
+        orders = Order.objects.values('date', 'total', 'customer')
+        order_items = OrderItem.objects.values('item__name', 'quantity', 'price', 'cost')
 
-        return Response(orders)
+        # Compute Revenue
+        revenue = 0
+        for order in orders:
+            revenue += order['total']
+
+        # Compute COGS
+        cost = 0
+        for item in order_items:
+            cost += item['cost'] * item['quantity']
+
+        # Compute Gross Profit
+        gross_profit = revenue - cost
+
+        # Compute Gross Profit Margin
+        gpm = gross_profit/revenue
+
+        # Sort by Highest Quantity Sold
+        highest_quantity = {}
+        for item in order_items:
+            if item['item__name'] in highest_quantity:
+                highest_quantity[item['item__name']] += item['quantity']
+            else:
+                highest_quantity[item['item__name']] = item['quantity']
+
+        sorted_quantity = sorted(highest_quantity.items(), key=lambda x: x[1], reverse=True)
+
+        # Sanitise Date
+        for order in orders:
+            month = int(order['date'].date().strftime("%m"))
+
+        return Response({'revenue': revenue, 'cost': cost, 'gross_profit': gross_profit, 'gpm': gpm, 'sorted_quantity': sorted_quantity})
