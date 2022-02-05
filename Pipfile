@@ -9,6 +9,7 @@ psycopg2-binary = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 cart = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
