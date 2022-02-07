@@ -7,7 +7,7 @@ urlpatterns = [
     path('login/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('get-account-details/<str:email>/', views.GetAccountDetails.as_view()),
-
+    path('admin-login/', views.AdminLogin.as_view())
 ]
 
 

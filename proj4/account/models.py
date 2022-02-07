@@ -7,6 +7,9 @@ class AccountManager(BaseUserManager):
         if not email:
             raise ValueError('Please input email address.')
 
+        if not password:
+            raise ValueError('Please input password.')
+
         user = self.model(email=self.normalize_email(email),
                           first_name=first_name,
                           last_name=last_name,
@@ -20,11 +23,15 @@ class AccountManager(BaseUserManager):
         if not email:
             raise ValueError('Please input email address.')
 
+        if not password:
+            raise ValueError('Please input password.')
+
         user = self.create_user(email=email, first_name=first_name, last_name=last_name, address=address, postal_code=postal_code, password=password)
 
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
+        user.save(using=self._db)
         return user
 
 
