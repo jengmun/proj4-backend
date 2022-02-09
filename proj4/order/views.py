@@ -95,7 +95,7 @@ class OrderAnalytics(APIView):
         gross_profit = revenue - cost
 
         # Compute Gross Profit Margin
-        gpm = gross_profit/revenue
+        gpm = round(gross_profit/revenue, 2)
 
         # Compute Revenue, COGS, Gross Profit, GPM per product, sorted by Highest Quantity Sold
         highest_quantity = {}
