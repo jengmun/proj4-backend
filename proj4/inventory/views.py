@@ -37,7 +37,7 @@ class AddInventory(APIView):
 
 
 class UpdateInventory(APIView):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, pk):
         inventory = Inventory.objects.get(product_id=pk)
