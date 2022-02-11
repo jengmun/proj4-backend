@@ -7,8 +7,11 @@ from .serializers import InventorySerializer
 
 class InventoryList(APIView):
     def get(self, request):
-        inventory = Inventory.objects.all()
-        serializer = InventorySerializer(inventory, many=True)
+        try:
+            inventory = Inventory.objects.all()
+            serializer = InventorySerializer(inventory, many=True)
+        except Exception as e:
+            print(e)
 
         return Response(serializer.data)
 
