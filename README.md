@@ -6,11 +6,11 @@ Click [here](https://skooob.netlify.app) to view the app!
 
 # Built With
 
-- React (Typescript) with Redux
+- React (TypeScript) with Redux
 - Material-UI CSS Framework
 - Recharts (Node.js charting library)
 - Django
-- Postgresql
+- PostgreSQL
 
 # Introduction
 
