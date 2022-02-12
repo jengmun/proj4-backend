@@ -8,7 +8,7 @@ Click [here](https://skooob.netlify.app) to view the app!
 
 - React (Typescript) with Redux
 - Material-UI CSS Framework
-- Recharts
+- Recharts (Node.js charting library)
 - Django
 - Postgresql
 
