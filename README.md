@@ -2,8 +2,6 @@
 
 Made for SEI33 - Project 4
 
-Click [here](https://skooob.netlify.app) to view the app!
-
 # Built With
 
 - React (TypeScript) with Redux
